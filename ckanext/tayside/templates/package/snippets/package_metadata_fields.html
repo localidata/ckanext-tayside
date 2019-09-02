@@ -33,7 +33,7 @@
 {% block custom_fields %}
   {% set extras = [] %}
   {% for extra in data.extras %}
-    {% set exluded_extras = ['theme', 'publisher_email', 'publisher_url'] %}
+    {% set exluded_extras = ['publisher_email', 'publisher_url'] %}
     {% if extra.key not in exluded_extras %}
       {% if extras.append(extra) %}{% endif %}
     {% endif %}

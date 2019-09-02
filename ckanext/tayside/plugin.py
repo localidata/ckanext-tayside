@@ -279,35 +279,3 @@ class TaysidePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm,
         return labels
 
 
-class TaysideGroupSchemaPlugin(plugins.SingletonPlugin, DefaultGroupForm):
-    plugins.implements(plugins.IGroupForm, inherit=True)
-
-    # IGroupForm
-
-    def group_types(self):
-        return ['group']
-
-    def form_to_db_schema(self):
-        convert_to_extras = toolkit.get_converter('convert_to_extras')
-        ignore_missing = toolkit.get_validator('ignore_missing')
-
-        schema = super(TaysideGroupSchemaPlugin, self).form_to_db_schema()
-        schema.update({
-            'theme': [convert_to_extras, ignore_missing, unicode]
-        })
-
-        return schema
-
-    def db_to_form_schema(self):
-        convert_from_extras = toolkit.get_converter('convert_from_extras')
-        ignore_missing = toolkit.get_validator('ignore_missing')
-        not_empty = toolkit.get_validator('not_empty')
-
-        schema = super(TaysideGroupSchemaPlugin, self).form_to_db_schema()
-        schema.update({
-            'theme': [convert_from_extras, ignore_missing],
-            'num_followers': [not_empty],
-            'package_count': [ignore_missing]
-        })
-
-        return schema

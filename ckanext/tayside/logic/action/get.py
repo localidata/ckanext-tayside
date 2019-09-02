@@ -23,14 +23,7 @@ def package_show(context, data_dict):
         return result
 
     groups = package.get_groups(group_type='group')
-    themes = []
-
-    for group in groups:
-        theme = group.extras.get('theme')
-
-        if theme:
-            themes.append(theme)
-
+    
     result = result.copy()
     extras = result.get('extras')
     extra_theme_found = False
@@ -39,10 +32,6 @@ def package_show(context, data_dict):
 
     if extras:
         for extra in extras:
-            if extra.get('key') == 'theme':
-                extra['value'] = themes
-                extra_theme_found = True
-
             if extra.get('key') == 'publisher_email':
                 extra_publisher_email_found = True
                 data_dict = {'id': owner_org}
@@ -56,9 +45,6 @@ def package_show(context, data_dict):
                                           action='read',
                                           id=owner_org, qualified=True)
                 extra['value'] = publisher_url
-
-        if not extra_theme_found:
-            extras.append({'key': 'theme', 'value': themes})
 
         if not extra_publisher_email_found:
             data_dict = {'id': owner_org}
