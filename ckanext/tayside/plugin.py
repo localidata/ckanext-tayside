@@ -12,6 +12,61 @@ import ckanext.tayside.logic.action.get as get_actions
 from ckanext.tayside.logic import validators as tayside_validators
 from ckanext.tayside.logic import converters as tayside_converters
 
+def format_date(date):
+    '''Take timestamp and return a formatted date Month, day Year.'''
+    try:
+        mytime = time.strptime(date[:10], "%Y-%m-%d")
+    except:
+        return None
+    output = time.strftime("%B %d, %Y", mytime)
+    # Just return some example text.
+    return output
+
+def update_frequency():
+    frequency_list = (u"Yearly", u"Monthly", u"Weekly", u"Daily", u"Realtime", u"Punctual", u"Variable", u"Never")
+    return frequency_list
+
+def city_departments():
+    department_list = (
+        u"City Manager", u"Engineering", u"Finance & Technology", u"Human Resources",
+        u"Parks, Recreation & Culture", u"Planning & Development", u"RCMP Support Services",
+        u"Surrey Fire Service"
+    )
+    return department_list
+
+def get_group_list():
+    groups = toolkit.get_action('group_list')(
+        data_dict={'all_fields': True})
+
+    return groups
+
+def get_group_list_order():
+
+    groups = toolkit.get_action('group_list')(
+        data_dict={'all_fields': True,'sort':'package_count desc'})
+    realOrderedGroups = sorted(groups, key=lambda k: k['package_count'], reverse=True) 
+
+    return realOrderedGroups
+
+
+def get_summary_list(num_packages):
+    list_without_summary = \
+    toolkit.get_action('package_search')(data_dict={'rows': num_packages, 'sort': 'metadata_modified desc'})['results']
+    list_with_summary = []
+    for package in list_without_summary:
+        list_with_summary.append(toolkit.get_action('package_show')(
+            data_dict={'id': package['name'], 'include_tracking': True})
+        )
+    return list_with_summary
+
+def get_visit_summary_list(num_packages):
+    list_without_summary = toolkit.get_action('package_search')(data_dict={'rows':num_packages,'sort':'views_recent desc'})['results']
+    list_with_summary = []
+    for package in list_without_summary:
+        list_with_summary.append(toolkit.get_action('package_show')(
+        data_dict={'id':package['name'],'include_tracking':True})
+        )
+    return list_with_summary
 
 # There is a bug in CKAN where header keys and values for CORS are using
 # unicode, and that causes problem in uwsgi. This monkey patch fixes that.
@@ -185,13 +240,18 @@ class TaysidePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm,
             'tayside_get_groups': helpers.get_groups,
             'tayside_get_footer_logos': helpers.get_footer_logos,
             'tayside_resource_total_views': helpers.resource_total_views,
-            'tayside_get_downloads_for_resources':
-            helpers.get_downloads_for_resources,
+            'tayside_get_downloads_for_resources': helpers.get_downloads_for_resources,
             'tayside_order_resources': helpers.order_resources,
             'tayside_get_tags': helpers.get_tags,
             'tayside_organization_image_url': helpers.organization_image_url,
-            'tayside_get_update_frequency_list':
-            helpers.get_update_frequency_list,
+            'tayside_get_update_frequency_list': helpers.get_update_frequency_list,
+            'format_date': format_date,
+            'update_frequency': update_frequency,
+            'city_departments': city_departments,
+            'get_group_list': get_group_list,
+			'get_group_list_order': get_group_list_order,
+            'get_summary_list': get_summary_list,
+			'get_visit_summary_list': get_visit_summary_list,         
         }
 
     # IConfigurer
