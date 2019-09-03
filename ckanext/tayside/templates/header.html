@@ -4,8 +4,11 @@
   {{ h.build_nav_main(
     ('search', _('Datasets')),
     ('organizations_index', _('Organizations')),
-    ('group_index', _('Groups')),
-    ('about', _('About')) ) }}
+    ('group_index', _('Groups')) )  }}    
+    <li><a href="/log">Blog</a></li>    
+    {{ h.build_nav_main(    
+    ('ckanext_showcase_index', _('Showcases')),
+    ('about', _('About')) ) }}    
 {% endblock %}
 
 {% block header_wrapper %}
