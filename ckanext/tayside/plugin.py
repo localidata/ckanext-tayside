@@ -12,6 +12,18 @@ import ckanext.tayside.logic.action.get as get_actions
 from ckanext.tayside.logic import validators as tayside_validators
 from ckanext.tayside.logic import converters as tayside_converters
 
+
+def showcases(num=24):
+    """Return a list of showcases"""
+    sorted_showcases = []
+    try:
+        showcases = toolkit.get_action('ckanext_showcase_list')({},{})
+        sorted_showcases = sorted(showcases, key=lambda k: k.get('metadata_modified'), reverse=True)
+    except:
+        print "[ckanext-extensionstheme] Error in retrieving list of showcases"
+    return sorted_showcases[:num]
+    
+ 
 def format_date(date):
     '''Take timestamp and return a formatted date Month, day Year.'''
     try:
@@ -251,7 +263,8 @@ class TaysidePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm,
             'get_group_list': get_group_list,
 			'get_group_list_order': get_group_list_order,
             'get_summary_list': get_summary_list,
-			'get_visit_summary_list': get_visit_summary_list,         
+			'get_visit_summary_list': get_visit_summary_list,
+            'extensionstheme_get_showcases': showcases,            
         }
 
     # IConfigurer

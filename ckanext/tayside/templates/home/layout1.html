@@ -71,17 +71,35 @@
     
     
     <div role="main">
-  <div class="container">
-    <div class="row-fluid">
-      <div class="span6">
-        {% snippet 'home/snippets/featured_popular.html' %}
-      </div>
-      <div class="span6">
-        {% snippet 'home/snippets/featured_recent.html' %}
-      </div>
+        <div class="container">
+            <div class="row-fluid">
+                <div class="span6">
+                    {% snippet 'home/snippets/featured_popular.html' %}
+                </div>
+                <div class="span6">
+                    {% snippet 'home/snippets/featured_recent.html' %}
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+
+    
+
+    <div role="main">
+        <div class="container">
+        
+        <header class="module-heading media">
+              <div class="media-content">
+                <h3 class="media-heading">Visualizaciones</h3>                
+              </div>
+            </header>
+            
+              {% if h.extensionstheme_get_showcases() %}
+                {% snippet 'home/snippets/showcase_list.html', showcases=h.extensionstheme_get_showcases() %}
+              {% endif %}
+            
+        </div>
+    </div>
     
     
   </div>
