@@ -3,9 +3,14 @@
 {% block footer_content %}
   {% set api_url = 'http://docs.ckan.org/en/{0}/api/'.format(g.ckan_doc_version) %}
   <ul class="inline list-wide">
-    <li><a href="{{ h.url_for('pages_show', page='/privacy') }}">{{ _('Cookies & Privacy') }}</a></li>
-    <li><a href="{{ h.url_for('pages_show', page='/code-of-conduct') }}">{{ _('Code of Conduct') }}</a></li>
-    <li><a href="{{ h.url_for('pages_show', page='/open-data-policy') }}">{{ _('Data Policy') }}</a></li>
-    <li><a href="{{ api_url }}">{{ _('CKAN API') }}</a></li>
+    <li><a href="/pages/informacion-datos-abiertos">¿Qué son los datos abiertos?</a></li>
+    <li><a href="/pages/info-plataforma-ckan">Información plataforma CKAN</a></li>
+    <li><a href="/pages/aviso-legal">Aviso Legal, Política de cookies y Accesibilidad</a></li>
+    <li><a href="/pages/api-open-data">API</a></li>
   </ul>
 {% endblock %}
+
+
+
+            
+
