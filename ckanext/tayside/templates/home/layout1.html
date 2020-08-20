@@ -1,8 +1,8 @@
-{% if app_globals.hero_image_url %}
-  {% if not app_globals.hero_image_url.startswith('http') %}
-    {% set hero_image_url = h.url_for_static('uploads/admin/' + app_globals.hero_image_url) %}
+{% if g.hero_image_url %}
+  {% if not g.hero_image_url.startswith('http') %}
+    {% set hero_image_url = h.url_for_static('uploads/admin/' + g.hero_image_url) %}
   {% else %}
-    {% set hero_image_url = app_globals.hero_image_url %}
+    {% set hero_image_url = g.hero_image_url %}
   {% endif %}
 {% endif %}
 
