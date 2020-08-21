@@ -41,13 +41,22 @@
             {{ super() }}
           {% endif %}
         {% endblock %}
-		<!--
-        <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-		-->
+
+
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+
+		<button id="headerRssButton">
+		<a href="/feeds/dataset.atom" alt="RSS del Catálogo"><i class="fa fa-rss"></i></a>
+		</button>
+		
+		
+		
+		
         <ul class="language-picker">
           {% set current_url = request.environ.CKAN_CURRENT_URL %}
           {% set current_lang = request.environ.CKAN_LANG %}
@@ -55,6 +64,7 @@
           <li {% if current_lang == 'fr' %}class="active"{% endif %}><a data-language="fr" data-language-name="French" href="{% url_for current_url, locale='fr' %}" >FR</a></li>
         </ul>
       </div>
+	  
     </div>
   </header>
 
