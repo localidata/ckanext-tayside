@@ -7,3 +7,33 @@
 
 {{ super() }}
 {% endblock %}
+
+
+
+  {% block package_description %}
+    {% if pkg.private %}
+      <span class="dataset-private label label-inverse pull-right">
+        <i class="fa fa-lock"></i>
+        {{ _('Private') }}
+      </span>
+    {% endif %}
+	<div class="row">
+		<div class="col-md-11">
+			<h1>
+			  {% block page_heading %}
+				{{ super() }}
+			  {% endblock %}
+			</h1>
+		</div>
+		<div class="col-md-1 text-right">
+			<button id="headerRssButton">
+				<a href="/dataset/history/{{ pkg.name }}?format=atom&days=1" title="RSS con las revisiones de este conjunto de datos"><i class="fa fa-rss"></i></a>
+			</button>
+		</div>
+	</div>
+    {% block package_notes %}
+      {{ super() }}
+    {% endblock %}
+    {# FIXME why is this here? seems wrong #}
+    <span class="insert-comment-thread"></span>
+  {% endblock %}
