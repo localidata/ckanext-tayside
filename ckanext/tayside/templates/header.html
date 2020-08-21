@@ -1,15 +1,5 @@
 {% ckan_extends %}
 
-{% block header_site_navigation_tabs %}
-  {{ h.build_nav_main(
-    ('search', _('Datasets')),
-    ('organizations_index', _('Organizations')),
-    ('group_index', _('Groups')) )  }}    
-    <li><a href="/blog">Blog</a></li>    
-    {{ h.build_nav_main(    
-    ('ckanext_showcase_index', _('Showcases')),
-    ('about', _('About')) ) }}    
-{% endblock %}
 
 {% block header_wrapper %}
   {% block header_account %}
@@ -43,20 +33,12 @@
         {% endblock %}
 
 
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-		  <span class="sr-only">Toggle navigation</span>
-		  <span class="icon-bar"></span>
-		  <span class="icon-bar"></span>
-		  <span class="icon-bar"></span>
-		</button>
-
+       
 		<button id="headerRssButton">
 		<a href="/feeds/dataset.atom" alt="RSS del Catálogo"><i class="fa fa-rss"></i></a>
 		</button>
 		
-		
-		
-		
+				
         <ul class="language-picker">
           {% set current_url = request.environ.CKAN_CURRENT_URL %}
           {% set current_lang = request.environ.CKAN_LANG %}
@@ -68,11 +50,28 @@
     </div>
   </header>
 
+  
   <div class="nav-main">
-    <div class="container-fluid">
-      <div class="clearfix nav-collapse">
-        {% block header_site_navigation %} {{ super() }} {% endblock %}
-      </div>
-    </div>
-  </div>
+  <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button> 
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+				<li><a href="/dataset">Conjuntos de Datos</a></li>
+				<li><a href="/organization">Organizaciones</a></li>
+				<li><a href="/group">Categorias</a></li>    
+				<li><a href="/blog">Noticias</a></li>    
+				<li><a href="/showcase">Destacados</a></li>
+            </ul>            
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+	</div>
 {% endblock %}
