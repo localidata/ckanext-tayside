@@ -46,22 +46,6 @@ def package_show(context, data_dict):
                                           id=owner_org, qualified=True)
                 extra['value'] = publisher_url
 
-        if not extra_publisher_email_found:
-            data_dict = {'id': owner_org}
-            org = toolkit.get_action('organization_show')({}, data_dict)
-            organization_email = org.get('organization_email')
-
-            if organization_email:
-                extras.append({
-                    'key': 'publisher_email',
-                    'value': organization_email
-                })
-
-        if not extra_publisher_url_found:
-            publisher_url = h.url_for(controller='organization', action='read',
-                                      id=owner_org, qualified=True)
-            extras.append({'key': 'publisher_url', 'value': publisher_url})
-
         return result
     else:
         result.update({'extras': []})
@@ -72,9 +56,6 @@ def package_show(context, data_dict):
 
     if organization_email:
         extras.append({'key': 'publisher_email', 'value': organization_email})
-
-    publisher_url = h.url_for(controller='organization', action='read',
-                              id=owner_org, qualified=True)
-    extras.append({'key': 'publisher_url', 'value': publisher_url})
+ 
 
     return result

@@ -3,51 +3,15 @@
 
 {% ckan_extends %}
 
-{% block package_basic_fields_org %}
-  {{ super() }}
-
-  <span class="info-block info-inline allowed-users-info-block">
-    <i class="fa fa-info-circle"></i>
-    {% trans %}Select users outside your organisation who should have access to this private dataset.{% endtrans %}
-  </span>
-  {% set attrs = {'data-module': 'tayside-autocomplete', 'data-module-tags': true, 'data-module-source': '/api/2/util/tayside_user/autocomplete?q=?'} %}
-  {{ form.input('allowed_users', label=_('Allowed users'), placeholder=_('Enter usernames'), value=data.allowed_users, error=errors.allowed_users, classes=['control-medium'], attrs=attrs) }}
-{% endblock %}
 
 {% block package_basic_fields_title %}
   {{ form.input('title', id='field-title', label=_('Title'), placeholder=_('eg. A descriptive title'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target'}, is_required=True) }}
 {% endblock %}
 
-{% block package_basic_fields_description %}
-  {{ form.markdown('notes', id='field-notes', label=_('Description'), placeholder=_('eg. Some useful notes about the data'), value=data.notes, error=errors.notes, is_required=True) }}
-{% endblock %}
 
 {% block package_basic_fields_tags %}
   {% set tag_attrs = {'data-module': 'autocomplete', 'data-module-tags': '', 'data-module-source': '/api/2/util/tag/autocomplete?incomplete=?'} %}
   {{ form.input('tag_string', id='field-tags', label=_('Tags'), placeholder=_('eg. economy, mental health, government'), value=data.tag_string, error=errors.tags, classes=['control-full'], attrs=tag_attrs, is_required=True) }}
 {% endblock %}
 
-{#{% block package_basic_fields_tags %}
-  {% set attrs = {'multiple': 'multiple', 'data-module': 'autocomplete'} %}
-  {% set tags = h.tayside_get_tags() %}
-  {% set classes = ['control-select', 'control-full'] %}
-  {% set id = 'field-tags' %}
-  {% set label = _('Tags') %}
-  {% set error = errors.tag_string %}
-  {% set is_required = True %}
-  {% set name = 'tag_string' %}
-  {% set selected = data.tag_string %}
 
-  {% call form.input_block(id or name, label or name, error, classes, extra_html='', is_required=True) %}
-    <select id="{{ id or name }}" name="{{ name }}" {{ form.attributes(attrs) }}>
-      {% for group in tags %}
-        <optgroup label="{{ group.group }}">
-          {% for tag in group.tags %}
-            <option value="{{ tag }}"{% if tag in selected %} selected{% endif %}>{{ tag }}</option>
-          {% endfor %}
-        </optgroup>
-      {% endfor %}
-    </select>
-  {% endcall %}
-{% endblock %}
-#}
