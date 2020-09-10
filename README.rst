@@ -35,11 +35,19 @@ To install ckanext-tayside:
 
 1. Activate your CKAN virtual environment, for example::
 
-     . /usr/lib/ckan/default/bin/activate
+    source /usr/lib/ckan/default/bin/activate
+	
 
 2. Install the ckanext-tayside Python package into your virtual environment::
 
-     pip install git+https://github.com/ViderumGlobal/ckanext-tayside.git#egg=ckanext-tayside
+    cd /usr/lib/ckan/default/src
+	git clone https://github.com/localidata/ckanext-tayside
+	cd ckanext-tayside
+	pip install -r requirements.txt	 
+	python setup.py develop
+	//python setup.py develop --uninstall
+
+	 
 
 3. Add ``tayside`` to the ``ckan.plugins`` setting in your CKAN
    config file (by default the config file is located at
