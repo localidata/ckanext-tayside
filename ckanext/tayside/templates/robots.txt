@@ -1,6 +1,58 @@
 {% ckan_extends %}
 
+User-agent: *
 {% block all_user_agents -%}
-Disallow: /
+Disallow: /dataset/rate/
+Disallow: /revision/
+Disallow: /dataset/*/history
+Disallow: /api/
+Crawl-Delay: 300
 {%- endblock %}
 
+
+{% block additional_user_agents -%}
+
+User-agent: Googlebot
+Crawl-Delay: 90
+Disallow: /dataset/rate/
+Disallow: /revision/
+Disallow: /dataset/*/history
+Disallow: /datastore/
+Disallow: /api/
+
+User-agent: Slurp
+Crawl-Delay: 90
+Disallow: /dataset/rate/
+Disallow: /revision/
+Disallow: /dataset/*/history
+Disallow: /datastore/
+Disallow: /api/
+
+User-Agent: msnbot
+Crawl-Delay: 90
+Disallow: /dataset/rate/
+Disallow: /revision/
+Disallow: /dataset/*/history
+Disallow: /datastore/
+Disallow: /api/
+
+User-Agent: msnbot-media
+Crawl-Delay: 90
+Disallow: /dataset/rate/
+Disallow: /revision/
+Disallow: /dataset/*/history
+Disallow: /datastore/
+Disallow: /api/
+
+User-Agent: bingbot
+Crawl-Delay: 90
+Disallow: /dataset/rate/
+Disallow: /revision/
+Disallow: /dataset/*/history
+Disallow: /datastore/
+Disallow: /api/
+
+User-agent: Linguee
+Disallow: /
+
+{%- endblock %}
